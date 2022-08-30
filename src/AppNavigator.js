@@ -13,7 +13,6 @@ function AppNaviigator() {
         <RootStack.Navigator screenOptions={{ headerShown: false}}>
           <RootStack.Screen name='Auth' component={AuthStack}/>
           <RootStack.Screen name='App' component={BottomTabs}/>
-
         </RootStack.Navigator>
       </NavigationContainer>
     );

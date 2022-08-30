@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import {StatusBar, useColorScheme, Image, StyleSheet, View} from 'react-native';
-// import color from '../../utils/Colors';
+import {useColorScheme, Image, StyleSheet, View} from 'react-native';
+import color from '../../utils/Colors';
 
 const  SplashScreen = ({ navigation })=> {
 
@@ -20,10 +20,9 @@ const  SplashScreen = ({ navigation })=> {
     <View
       style={[styles.container]}
     >
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Image
-        style={{ height:'70%', width:'70%' }}
-        source={require('../../utils/images/github.png')}
+        style={[styles.viewImg]}
+        source={require('../../utils/images/improving.png')}
         resizeMode={'contain'}
       />
     </View>        
@@ -35,8 +34,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent:'center',
     alignItems:'center',
-    // backgroundColor:color.secondary
+    backgroundColor: color.principal
   },
+  viewImg:{ 
+    height:'20%', 
+    width:'50%', 
+    backgroundColor:color.buttonColor1, borderRadius:15
+  }
 });
 
 export default SplashScreen

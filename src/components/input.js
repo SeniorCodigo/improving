@@ -13,7 +13,7 @@ const Input = (props) => {
         style={[styles.input, 
           { backgroundColor:color.white, 
             width: props.width ?  props.width :width / 1.1, 
-            borderColor: focus ? color.green : color.grayBorder, 
+            borderColor: focus ? color.buttonColor1 : color.grayBorder, 
             paddingVertical: props.paddingVertical ? props.paddingVertical : 12, 
           }
         ]}
@@ -32,7 +32,7 @@ const Input = (props) => {
       {showPassword ?
           <View style={{ position: 'absolute', right: 10 }}>
             <TouchableOpacity
-              style={{ alignItems: 'center', width: '20%', }}
+              style={{ alignItems: 'center',color: color.buttonColor1 }}
               onPress={() => { setShowPassword(!showPassword) }}
             >
               {props.eye}
@@ -41,7 +41,7 @@ const Input = (props) => {
           :
           <View style={{ position: 'absolute', right: 10 }}>
             <TouchableOpacity
-              style={{ alignItems: 'center', width: '20%', }}
+              style={{ alignItems: 'center' , color: color.buttonColor1}}
               onPress={() => { setShowPassword(!showPassword) }}
             >
               {props.eyeOff}

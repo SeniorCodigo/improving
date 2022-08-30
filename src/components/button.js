@@ -14,12 +14,16 @@ const Button  = (props) => {
                 borderRadius: 7,
                 borderColor: props.borderColor,
                 marginTop: props.marginTop,
+                shadowColor: '#171717',
+                shadowOffset: {width: -2, height: 6},
+                shadowOpacity: 3,
+                shadowRadius: 3,
             }}
         disabled={props.disabled}
         onPress={props.onPress}
         >
             <View style={{flexDirection:'row', width:'100%',justifyContent: 'center'}}>
-                <Text style={{fontSize:18,}}>
+                <Text style={{fontSize:18, color: props.textColor}}>
                     {props.text}
                 </Text>
             </View>

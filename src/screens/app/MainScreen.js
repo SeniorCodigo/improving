@@ -1,45 +1,40 @@
-import React, {useState, useRef} from 'react';
-import { View, Text, StyleSheet , Dimensions} from 'react-native';
-// import Carousel from 'react-native-snap-carousel';
-// import Carousel from 'react-native-snap-carousel';
-// import Carousel from 'react-native-anchor-carousel';
-
-import * as Components from '../../components';
+import React, {useState, useEffect} from 'react';
+import { View, StyleSheet , FlatList, Image,} from 'react-native';
+import { Avatar } from 'react-native-paper';
+import { getData } from '../../request';
 import color from '../../utils/Colors';
-const {width: windowWidth} = Dimensions.get('window');
-
-// const carouselRef = useRef(null);
-
 
 const MainScreen = () => {
+  const [data, setData]=useState([])
+  
+  useEffect(() => {
+    getData()
+    .then(response => response.json())
+    .then(json => {setData(json?.results)})
+    .catch(error=>{
+      console.log("error=>", error)
+    })
+  }, []);
 
-   const renderItem = ({item, index}) => {
-        return (
-                <TouchableOpacity
-                        style={styles.item}
-                        onPress={() => {
-                         carouselRef.current.scrollToIndex(index);
-                        }}>
-                 ...
-                </TouchableOpacity>
-        );
-       }
+  const renderItem = ({ item }) => (
+    <View  style={{padding:25, justifyContent:'center', }} key={item?.id} >
+      <Avatar.Image
+        source={{uri : item?.image}}
+        size={150}
+        resizeMode={'contain'}
+      />
+    </View>
+  );
+
     return (
         <View style={[styles.container]}>
-            <Text>
-                {`Main`}
-            </Text>
-            {/* <Carousel layout={'default'} /> */}
-            {/* <Carousel
-        ref={carouselRef}
-        data={Array(3).fill(0)}
-        renderItem={renderItem}
-        style={styles.carousel}
-        itemWidth={windowWidth * 0.8}
-        containerWidth={windowWidth}
-        separatorWidth={0}
-/> */}
-
+         <FlatList
+            horizontal
+            style={{flex:1}}
+            data={ data }
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
         </View>
       );
 }
@@ -50,6 +45,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems:'center',
       justifyContent:'center',
+      backgroundColor: color.principal
     },
     carousel: {
         flexGrow: 0,
