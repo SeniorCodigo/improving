@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
       borderWidth: 2,
        borderColor: color.grayBorder,
       backgroundColor: 'transparent',
-      marginRight: 20
+      marginRight: 15
     },
     checkboxChecked: {
       width: 24,
       height: 24,
       backgroundColor: color.buttonColor1,
-      marginRight: 10
+      marginRight: 15
     },
     checkboxContainer: {
       flexDirection: 'row',
