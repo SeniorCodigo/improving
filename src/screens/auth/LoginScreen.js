@@ -33,7 +33,6 @@ const LofinScreen = ({navigation}) => {
     setUser("")
     setPassword("")
     setChecked(false)
-
 }
     return (
         <View style={[styles.container]}>
