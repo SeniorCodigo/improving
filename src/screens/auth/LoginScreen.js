@@ -22,62 +22,63 @@ const LofinScreen = ({navigation}) => {
     })
   }, []);
 
-  const goTo =  () => {
+  const handleLogin =  () => {
     if(checked){
       let data = {user: user,password: password, }
       let dataStr = JSON.stringify(data)
       CacheUtil.setUserData(dataStr)
+    }else{
+      CacheUtil.removeAll();
     }
-
     user.length>3 && password.length>3 && navigation.navigate('App')
     setUser("")
     setPassword("")
     setChecked(false)
-}
-    return (
-        <View style={[styles.container]}>
-            <Image
-              style={[styles.viewImg]}
-              source={require('../../utils/images/improving.png')}
-              resizeMode={'contain'}
-            />
-            <Components.Input
-              placeholder="User"
-              onChangeText={user => setUser(user)}
-              value={user}
-            />
-            <Components.Input
-              placeholder="Password"
-              onChangeText={password => setPassword(password)}
-              secureTextEntry={true}
-              value={password}
-              eye={<Ionicons name={'eye'} size={22} color={color.text} />}
-              eyeOff={<Ionicons name={'eye-off'} size={22} color={color.text} />}
-            />
-            <View style={styles.viewRememberme}>
-              <View style={[styles.checkboxContainer]} >
-                <TouchableOpacity
-                  style={[checked ? styles.checkboxChecked : styles.checkboxBase]}
-                  onPress={() => { setChecked(!checked) }}>
-                  {checked ? <Ionicons name="checkmark" size={22} color={color.white}/> : null}
-                </TouchableOpacity>
-                <Text style={[styles.text,]}>
-                  {`Remember me`}
-                </Text>
-                </View>
-                <Components.Button
-                  text={ "Login"}
-                  backgroundColor={color.buttonColor1}
-                  textColor={color.white}
-                  marginTop={40}
-                  width={'52%'}
-                  onPress={()=>goTo()}
-                />
-            </View>
-        </View>
-      );
-}
+  }
 
+    return (
+      <View style={[styles.container]}>
+          <Image
+            style={[styles.viewImg]}
+            source={require('../../utils/images/improving.png')}
+            resizeMode={'contain'}
+          />
+          <Components.Input
+            placeholder="User"
+            onChangeText={user => setUser(user)}
+            value={user}
+          />
+          <Components.Input
+            placeholder="Password"
+            onChangeText={password => setPassword(password)}
+            secureTextEntry={true}
+            value={password}
+            eye={<Ionicons name={'eye'} size={22} color={color.text} />}
+            eyeOff={<Ionicons name={'eye-off'} size={22} color={color.text} />}
+          />
+          <View style={styles.viewRememberme}>
+            <View style={[styles.checkboxContainer]} >
+              <TouchableOpacity
+                style={[checked ? styles.checkboxChecked : styles.checkboxBase]}
+                onPress={() => { setChecked(!checked) }}>
+                {checked ? <Ionicons name="checkmark" size={22} color={color.white}/> : null}
+              </TouchableOpacity>
+              <Text style={[styles.text,]}>
+                {`Remember me`}
+              </Text>
+              </View>
+              <Components.Button
+                text={ "Login"}
+                backgroundColor={color.buttonColor1}
+                textColor={color.white}
+                marginTop={40}
+                width={'52%'}
+                onPress={()=>handleLogin()}
+              />
+          </View>
+      </View>
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -117,8 +118,6 @@ const styles = StyleSheet.create({
       top:20,
       right:10,
     },
-
   });
 
- 
 export default LofinScreen;

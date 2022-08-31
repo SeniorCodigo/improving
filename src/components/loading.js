@@ -1,28 +1,22 @@
-import React, { } from "react";
-import { Alert, Modal, StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import React from "react";
+import { Modal, StyleSheet, View, } from "react-native";
 import LottieView from 'lottie-react-native';
-function Loading({isPlay}) {
 
+const Loading= () =>{
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={false}
-      onRequestClose={() => { }}
-    >
-      <View style={styles.container}>
-        <LottieView
-          source={require('../utils/Lottie/loading.json')}
-          style={{ width: '75%', height:'75%' }}
-          autoPlay
-          loop />
-      </View>
-    </Modal>
+    <View style={styles.container}>
+      <LottieView
+        source={require('../utils/Lottie/loading.json')}
+        autoPlay
+        loop />
+    </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    width: '100%', 
+    height:'100%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.6)'

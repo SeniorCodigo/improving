@@ -8,6 +8,13 @@ const MyPhotosScreen = () => {
   const [data, setData]=useState(null)
   const [refreshing, setrefreshing] = useState(false);
   const [pagination, setPagination] = useState(0);
+  const [isLoading, setIsLoading]=useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+  }, []);
   
   useEffect(() => {
     getData(pagination)
@@ -41,6 +48,7 @@ const MyPhotosScreen = () => {
             )
           }}
         />
+        {isLoading && <Components.Loading/>} 
       </View>
       );
 }

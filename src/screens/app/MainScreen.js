@@ -1,12 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet , FlatList, Image,} from 'react-native';
 import { Avatar } from 'react-native-paper';
+import * as Components from '../../components';
 import { getData } from '../../request';
 import color from '../../utils/Colors';
 
 const MainScreen = () => {
   const [data, setData]=useState([])
-  
+  const [isLoading, setIsLoading]=useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+  }, []);
+
   useEffect(() => {
     getData()
     .then(response => response.json())
@@ -35,6 +43,7 @@ const MainScreen = () => {
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
+          {isLoading && <Components.Loading/>} 
         </View>
       );
 }

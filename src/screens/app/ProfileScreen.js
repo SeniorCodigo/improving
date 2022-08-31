@@ -10,7 +10,14 @@ import color from '../../utils/Colors';
 const ProfileScreen = ({navigation}) => {
   const [dataLocation, setDataLocation]= useState(null);
   const [dataDevice, setDataDevice]= useState(null);
-  const [isModal, setIsModal]=useState(false)
+  const [isModal, setIsModal]=useState(false);
+  const [isLoading, setIsLoading]=useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+  }, []);
 
   useEffect(() => {
     setDataDevice(getDeviceInfo())
@@ -36,53 +43,59 @@ const ProfileScreen = ({navigation}) => {
           <Text style={[styles.text0]}>
               {`Profile`}
           </Text>
-          <View style={[styles.card]}>
-            <Avatar.Image
-              size={150}
-              source={require('../../utils/images/papito.jpg')}
-              resizeMode={'contain'}
-            />
-            <Text style={[styles.text1]}>
-                {`Name: Alan Alvarado Salgado`}
-            </Text>
-            <Text style={[styles.text1]}>
-                {`Job: Mobile React Native developer`}
-            </Text>
-            <Text style={[styles.text1]}>
-                {`Age: 36`}
-            </Text>
-            <Text style={[styles.text1]}>
-                {`Latitude: ${dataLocation?.latitude} `}
-            </Text>
-            <Text style={[styles.text1]}>
-            {`Longitude: ${dataLocation?.longitude}`}
-            </Text>
-            <Components.Button
-              text={ "Device info"}
-              backgroundColor={color.white}
-              textColor={color.card}
-              marginTop={15}
-              borderColor={'transparent'}
-              width={'40%'}
-              onPress={(d=>{handleModal()})}
-            />
+          {isLoading ? 
+            <Components.Loading/>
+          :
+            <>
+              <View style={[styles.card]}>
+                <Avatar.Image
+                  size={150}
+                  source={require('../../utils/images/papito.jpg')}
+                  resizeMode={'contain'}
+                />
+                <Text style={[styles.text1]}>
+                    {`Name: Alan Alvarado Salgado`}
+                </Text>
+                <Text style={[styles.text1]}>
+                    {`Job: Mobile React Native developer`}
+                </Text>
+                <Text style={[styles.text1]}>
+                    {`Age: 36`}
+                </Text>
+                <Text style={[styles.text1]}>
+                    {`Latitude: ${dataLocation?.latitude} `}
+                </Text>
+                <Text style={[styles.text1]}>
+                {`Longitude: ${dataLocation?.longitude}`}
+                </Text>
+                <Components.Button
+                  text={ "Device info"}
+                  backgroundColor={color.white}
+                  textColor={color.card}
+                  marginTop={15}
+                  borderColor={'transparent'}
+                  width={'40%'}
+                  onPress={(d=>{handleModal()})}
+                />
 
-            {isModal && 
-              <Components.Modal
-                style={[styles.button]}
-                setIsModal={setIsModal}
-                data={dataDevice}
-              />
-            }
-          </View>
-          <Components.Button
-            text={ "Logout"}
-            backgroundColor={color.buttonColor1}
-            textColor={color.white}
-            marginTop={40}
-            onPress={()=>handleLogout()}
-            borderColor={'transparent'}
-          />
+                {isModal && 
+                  <Components.Modal
+                    style={[styles.button]}
+                    setIsModal={setIsModal}
+                    data={dataDevice}
+                  />
+                }
+            </View>
+            <Components.Button
+              text={ "Logout"}
+              backgroundColor={color.buttonColor1}
+              textColor={color.white}
+              marginTop={40}
+              onPress={()=>handleLogout()}
+              borderColor={'transparent'}
+            />
+          </>
+          } 
         </View>
       );
 }
